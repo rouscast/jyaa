@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition template="/WEB-INF/partials/layout.xhtml">
+   		<ui:define name="content">
+
+	<h:form>
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<f:facet name="header">
+				<p:outputLabel>Actualizar Datos</p:outputLabel>
+			</f:facet>
+			
+			<p:outputLabel for="names" value="Nombres:" />
+			<p:inputText id="names" value="#{loginBean.user.names}"
+				required="true" label="Nombres" />
+			<p:message for="names" />
+
+			<p:outputLabel for="lastName" value="Apellidos:" />
+			<p:inputText id="lastName" value="#{loginBean.user.lastName}"
+				required="true" label="Apellidos" />
+			<p:message for="lastName" />
+
+			<p:outputLabel for="birthdate" value="Fecha de nacimiento:" />
+			<p:calendar id="birthdate" value="#{loginBean.user.birthdate}" 
+			label="Fecha de nacimiento">
+				<f:convertDateTime pattern="MM/dd/yyyy" />
+				<f:validator validatorId="birthdateValidator" />
+			</p:calendar>			
+			<p:message for="birthdate" />
+
+			<p:outputLabel for="mail" value="Email:" />
+			<p:inputText id="mail" value="#{loginBean.user.mail}" required="true"
+				label="Email" validator="#{userBean.validateMail}" />
+			<p:message for="mail" />
+
+			<p:outputLabel for="sex" value="Sexo:" />
+			<p:selectOneRadio id="sex" value="#{loginBean.user.sex}"
+				required="true" label="Sexo">
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+				<f:selectItem itemValue="FEMENINO" itemLabel="Femenino" />
+			</p:selectOneRadio>
+			<p:message for="sex" />
+
+			<p:outputLabel for="dom" value="Domicilio:" />
+			<p:inputText id="dom" value="#{loginBean.user.domicile}"
+				required="true" label="Domicilio" />
+			<p:message for="dom" />
+
+			<p:outputLabel for="doc" value="Documento:" />
+			<p:selectOneListbox id="doc"
+				value="#{loginBean.user.document.documentType.id}" label="Documento"
+				required="true">
+				<f:selectItems value="#{documentTypeBean.list}" var="documentType"
+					itemValue="#{documentType.id}" itemLabel="#{documentType.name}" />
+			</p:selectOneListbox>
+			<p:message for="doc" />
+
+			<p:outputLabel for="numberDoc" value="Nro:" />
+			<p:inputText id="numberDoc" value="#{loginBean.user.document.number}"
+				required="true" label="Nro"
+				validatorMessage="Ingrese un documento real">
+				<f:validateLongRange for="numberDoc" minimum="100000"
+					maximum="1000000000" />
+			</p:inputText>
+			<p:message for="numberDoc" />
+			
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Actualizar"
+					action="#{editProfileBean.update}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+
+	</h:form>
+
+	<h:form>
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<f:facet name="header">
+				<p:outputLabel>Cambio de contraseña</p:outputLabel>
+			</f:facet>
+
+			<p:outputLabel for="oldpassword" value="Contraseña Actual:" />
+			<p:password id="oldpassword" value="#{editProfileBean.oldPassword}"
+				validator="#{editProfileBean.validateOldPassword}" required="true"
+				label="Contraseña Actual" />
+			<p:message for="oldpassword" />
+
+			<p:outputLabel for="newpassword" value="Nueva Contraseña:" />
+			<p:password id="newpassword" value="#{editProfileBean.newPassword}"
+				match="renewpassword"
+				validatorMessage="Las contraseñas deben ser iguales" required="true"
+				label="Contraseña" />
+			<p:message for="newpassword" />
+
+			<p:outputLabel for="renewpassword" value="Repita Contraseña:" />
+			<p:password id="renewpassword"
+				value="#{editProfileBean.reNewPassword}" required="true"
+				label="Repita Contraseña" />
+			<p:message for="renewpassword" />
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Cambiar"
+					action="#{editProfileBean.updatePassword}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+
+	</ui:define>
+	</ui:composition>
+</body>
+</html>

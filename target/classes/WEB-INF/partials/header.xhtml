@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+    <body>
+	    <ui:composition>
+
+            <header>
+                <div class="row nvar-row">
+                    <nav class="navbar navbar-default" role="navigation">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                <span class="sr-only">Desplegar navegación</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <a class="navbar-brand" href="/JYAA/">
+                                JRuteros
+                            </a>
+                        </div>
+ 
+                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                            <ul class="nav navbar-nav">
+                              <c:if test="${loginBean.getUser() != null}">
+    							
+    
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rutas<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">                                       
+                                        <li><p:link href="/user/listRoutes.jsf">Mis rutas</p:link></li>
+                                        <li><p:link href="/user/route_new.jsf">Nueva ruta</p:link></li>
+                                        <li><p:link href="#">Buscar rutas</p:link></li>
+                                     </ul>
+                                </li>
+
+                                
+                             	
+								<c:if test="${loginBean.getUser().isAdmin() == true}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Abm's<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><p:link href="/admin/listactivity.jsf">Actividad</p:link></li>
+                                        <li><p:link href="/admin/listdifficulty.jsf">Dificultad</p:link></li>
+                                        <li><p:link href="/admin/listformat.jsf">Formato</p:link></li>
+                                        <li><p:link href="/admin/listprivacy.jsf">Privacidad</p:link></li>
+                                    </ul>
+                                </li>                             
+                             	<li><p:link href="/admin/users.jsf">ABM Usuarios</p:link></li>
+                             	</c:if>
+                             	</c:if>
+                                <li><p:link href="/admin/addMarkers.jsf">addMarkers q es???</p:link></li>
+                                <li><p:link href="#">Notificaciones ?????? <span class="sr-only">(current)</span></p:link></li>
+                            </ul>
+                            
+                         	
+                         	<c:choose>
+      							<c:when test="${loginBean.getUser() == null}">                            
+		                           	<ul class="nav navbar-nav navbar-right">
+		                           		<li><p:link href="/login.jsf">Iniciar Seccion</p:link></li>
+			      						<li><p:link href="/regist.jsf">Registrase</p:link></li>
+		                           	</ul>
+		                        </c:when>
+      							<c:otherwise>
+      								<ul class="nav navbar-nav navbar-right">
+      								<li class="dropdown">
+							          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${loginBean.getUser().getUserName()}<span class="caret"></span></a>
+							          <ul class="dropdown-menu">
+							            <li><p:link href="/user/editmyprofile.jsf">Editar Perfil</p:link></li>							           
+							            <li><h:form>
+											<p:commandLink value="Cerrar Seccion" action="#{loginBean.logout}" styleClass="centrado"
+											ajax="no-ajax" />
+										</h:form></li>							       
+							          </ul>
+							        </li>
+							        </ul>
+      							</c:otherwise>
+      							</c:choose>
+                           	
+                        </div>
+                        
+                    </nav>
+                </div>
+            </header>
+
+	    </ui:composition>
+    </body>
+
+</html>

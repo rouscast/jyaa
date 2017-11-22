@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+		<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+	
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			$(".datepicker").datepicker();
+		});
+	</script>
+	
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<f:facet name="header">
+				<p:outputLabel>Actualizar Datos de #{editProfileBean.user.userName}</p:outputLabel>
+			</f:facet>
+			
+			<p:outputLabel for="userName" value="Nombre de usuario:" />
+			<p:inputText id="userName" value="#{editProfileBean.newUserName}"
+				validator="#{userBean.validateUserName}"
+				label="Nombre de usuario" />
+			<p:message for="userName" />
+			
+			<p:outputLabel for="names" value="Nombres:" />
+			<p:inputText id="names" value="#{editProfileBean.user.names}"
+				required="true" label="Nombres" />
+			<p:message for="names" />
+
+			<p:outputLabel for="lastName" value="Apellidos:" />
+			<p:inputText id="lastName" value="#{editProfileBean.user.lastName}"
+				required="true" label="Apellidos" />
+			<p:message for="lastName" />
+
+			<p:outputLabel for="birthdate" value="Fecha de nacimiento:" />
+			<p:inputText id="birthdate" styleClass="datepicker"
+				value="#{editProfileBean.user.birthdate}" required="true"
+				validator="#{userBean.validateBirthdate}"
+				label="Fecha de nacimiento">
+				<f:convertDateTime pattern="MM/dd/yyyy" />
+			</p:inputText>
+			<p:message for="birthdate" />
+
+			<p:outputLabel for="mail" value="Email:" />
+			<p:inputText id="mail" value="#{editProfileBean.user.mail}"
+				required="true" label="Email" validator="#{userBean.validateMail}" />
+			<p:message for="mail" />
+
+			<p:outputLabel for="sex" value="Sexo:" />
+			<p:selectOneRadio id="sex" value="#{editProfileBean.user.sex}"
+				required="true" label="Sexo">
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+				<f:selectItem itemValue="FEMENINO" itemLabel="Femenino" />
+			</p:selectOneRadio>
+			<p:message for="sex" />
+
+			<p:outputLabel for="dom" value="Domicilio:" />
+			<p:inputText id="dom" value="#{editProfileBean.user.domicile}"
+				required="true" label="Domicilio" />
+			<p:message for="dom" />
+
+			<p:outputLabel for="doc" value="Documento:" />
+			<p:selectOneListbox id="doc"
+				value="#{editProfileBean.user.document.documentType.id}"
+				label="Documento" required="true">
+				<f:selectItems value="#{documentTypeBean.list}" var="documentType"
+					itemValue="#{documentType.id}" itemLabel="#{documentType.name}" />
+			</p:selectOneListbox>
+			<p:message for="doc" />
+
+			<p:outputLabel for="numberDoc" value="Nro:" />
+			<p:inputText id="numberDoc"
+				value="#{editProfileBean.user.document.number}" required="true"
+				label="Nro" validatorMessage="Ingrese un documento válido">
+				<f:validateLongRange for="numberDoc" minimum="100000"
+					maximum="1000000000" />
+			</p:inputText>
+			<p:message for="numberDoc" />
+
+			<p:outputLabel for="rol" value="Perfil:" />
+			<p:selectOneListbox id="rol"
+				value="#{editProfileBean.user.profile.id}" label="Perfil"
+				required="true">
+				<f:selectItems value="#{profileBean.list}" var="rol"
+					itemValue="#{rol.id}" itemLabel="#{rol}" />
+			</p:selectOneListbox>
+			<p:message for="rol" />
+
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Actualizar"
+					action="#{editProfileBean.updateAdmin}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+
+	</h:form>
+
+	<h:form>
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<f:facet name="header">
+				<p:outputLabel>Cambio de contraseña</p:outputLabel>
+			</f:facet>
+
+			<p:outputLabel for="newpassword" value="Nueva Contraseña:" />
+			<p:password id="newpassword" value="#{editProfileBean.newPassword}"	
+				validatorMessage="Las contraseñas deben ser iguales" required="true"
+				label="Contraseña" />
+			<p:message for="newpassword" />
+
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Cambiar"
+					action="#{editProfileBean.changePassword}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

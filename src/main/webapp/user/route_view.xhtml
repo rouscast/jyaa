@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>jRouteros | Ruta</title>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+	<h:form enctype="multipart/form-data">
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<p:panelGrid columns="4" styleClass="ui-panelgrid-blank" >
+			<f:facet name="header">
+			    <p:column colspan="4"><h:outputText value="--Ruta: #{routeBean.route.name}" /></p:column>
+		    </f:facet>
+			
+			<p:outputLabel for="description" value="Descripción" />
+			<h:outputText id="description" value="#{routeBean.route.description} " />
+			
+			<h:outputLabel for="distance" value="Distancia de la ruta:" />
+			<h:outputText id="distance" value="#{routeBean.route.distance}" /> 
+			
+			<p:outputLabel for="estimatedTime" value="Tiempo estimado:" />
+			<h:inputText id="estimatedTime" value="#{routeBean.route.estimatedTime}" readOnly="true" /> 
+							
+			<p:outputLabel for="dateRealization" value="Fecha de realización:" />
+			<p:calendar id="dateRealization" value="#{routeBean.route.dateRealization}" 
+				label="Fecha de realización" pattern="dd/MM/yyyy" disabled="true">
+			</p:calendar>
+			
+			<p:outputLabel for="privacyRoute" value="Privacidad:" />
+			<p:inputText id="privacyRoute" value="#{routeBean.route.privacy}" readOnly="true" />
+				
+			<p:outputLabel for="format" value="Formato:" />
+			<p:inputText  id="format" value="#{routeBean.route.format}" readOnly="true" />
+			
+			<p:outputLabel for="difficulty" value="Dificultad:" />
+			<p:inputText id="difficulty" value="#{routeBean.route.difficulty}" readOnly="true" />
+				
+			<p:outputLabel for="activity" value="Actividad:" />
+			<p:inputText id="activity" value="#{routeBean.route.activity}" readOnly="true"/>	
+			
+			<f:facet name="footer">
+				<h:commandButton type="submit" value="Editar Ruta" action="#{routeBean.saveRoute}"  styleClass="ui-button"/>
+			</f:facet>
+		</p:panelGrid>
+		<p:separator ></p:separator>
+		<p:dataTable value="#{routeBean.imagesIds}" var="car" >
+		    <p:column>
+		    	<p:graphicImage value="#{routeBean.imageFromDB}" width="150" height="150">
+		    		<f:param name="item_id" value="#{car}" />
+			    </p:graphicImage>
+		    </p:column>
+		</p:dataTable>
+		
+		<p:graphicImage value="#{routeBean.imageFromDB}" width="150" height="150" rendered="#{routeBean.saved}">
+		</p:graphicImage>
+
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>

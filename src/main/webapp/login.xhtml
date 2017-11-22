@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+    	<ui:composition template="WEB-INF/partials/layout.xhtml">
+
+	
+			<ui:define name="content">
+			
+			
+				<div id="login" class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+
+    				<div class="row">
+        				<div class="logo-login text-center">
+            				JRuteros 
+        				</div>
+    				</div>
+    
+   					 <div class="panel panel-default">
+
+        				<div class="panel-heading">
+            				<div class="panel-title text-center">
+                				Iniciar Session
+            				</div>
+        				</div>
+
+        				<div class="panel-body">
+        
+							<h:form id="form-login" styleClass="form-horizontal">
+								<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+								infoClass="MensajeInfo" layout="list" styleClass="centrado" ></h:messages>
+								
+								<p:message for="userName" />
+                				<div class="input-group">
+                    				<span class="input-group-addon">
+                        				<i class="glyphicon glyphicon-user"></i>
+                    				</span>   
+                    				<p:inputText styleClass="form-control" id="userName" value="#{loginBean.userName}" required="true" label="Nombre de usuario" placeholder="Nombre de usuario" />       
+                				</div>  
+
+								<p:message for="password" />
+                				<div class="input-group">
+                    				<span class="input-group-addon">
+                        				<i class="glyphicon glyphicon-lock"></i>
+                    				</span>
+                    				<p:password id="password" styleClass="form-control" value="#{loginBean.password}" required="true" label="Contraseña" placeholder="Contraseña" />      
+                				</div>   
+
+                				<div class="form-group">
+                    				<div class="col-sm-12 controls">
+                        				<p:commandButton icon="fa fa-check-circle-o" styleClass="btn btn-primary pull-right" type="submit" value="Ingresar" action="#{loginBean.login}" ajax="false"/>
+                    				</div>
+                				</div>
+                				           
+            				</h:form>
+
+        				</div>
+   					 </div>
+
+				</div>
+
+			</ui:define>
+
+    	</ui:composition>
+
+    </h:body>
+    
+</html>

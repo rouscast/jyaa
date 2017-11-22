@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+		<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+	
+
+	<h3>Lista de Fomatos</h3>
+	<p:link outcome="newformat">Nuevo Formato</p:link>
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true"
+			errorClass="MensajeError" infoClass="MensajeInfo" layout="list"
+			styleClass="centrado" />
+		<h:dataTable value="#{formatBean.list}" var="format" border="2"
+			cellspacing="1" cellpadding="1" binding="#{formatBean.formatTable}">
+			<h:column>
+				<c:facet name="header">Nombre</c:facet>
+                    #{format.name}
+                </h:column>
+			<h:column>
+				<c:facet name="header">Editar</c:facet>
+				<h:commandButton value="Editar" action="#{formatBean.searchFormat}">
+					<f:param name="id" value="#{format.id}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>
+
+
+
+
+
+

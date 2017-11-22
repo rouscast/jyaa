@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>jRouteros | Lista de Rutas</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+	<h3>Lista de Rutas</h3>
+	<h:form>
+		<h:dataTable value="#{routeBean.list}" var="route" border="2"
+			cellspacing="1" cellpadding="1" binding="#{routeBean.routesTable}">
+			<h:column>
+				<c:facet name="header">Descripcion</c:facet>
+                <h:outputText value="#{route.description}" />
+            </h:column>
+			<h:column>
+				<c:facet name="header">Visualizar</c:facet>
+				<h:commandButton value="Seleccionar" action="#{routeBean.selectRoute}">
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</h:body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+		<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<f:facet name="header">
+				<p:outputLabel>Actualizar Datos de Actividad #{activityBean.activity.name}</p:outputLabel>
+			</f:facet>
+
+			<p:outputLabel for="difName" value="Nombre de actividad:" />
+			<p:inputText id="difName" value="#{activityBean.activity.name}"
+				validator="#{activityBean.validateActivityName}"
+				label="Nombre de usuario" />
+			<p:message for="difName" />
+
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Actualizar"
+					action="#{activityBean.update}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

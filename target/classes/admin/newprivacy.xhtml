@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+
+			<p:outputLabel for="difName" value="Nombre de privacidad:" />
+			<p:inputText id="difName" value="#{privacyBean.name}"
+				required="true" label="Nombre de privacidad:" validator="#{privacyBean.validatePrivacyName}" />
+			<p:message for="difName" />
+
+			<f:facet name="footer">
+				<p:commandButton type="submit" value="Crear Privacidad"
+					action="#{privacyBean.create}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>

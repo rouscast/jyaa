@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>jRouteros | Alta de nueva Ruta</title>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+
+	<h:form enctype="multipart/form-data">
+		<h:messages id="mensajeGlobal" showSummary="true" 
+			globalOnly="true" errorClass="MensajeError" layout="list"
+			infoClass="MensajeInfo" styleClass="centrado" />
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank" rendered="#{!routeBean.saved}">
+			<f:facet name="header">
+				<p:outputLabel>Alta de nueva Ruta</p:outputLabel>
+			</f:facet>
+			
+			<p:outputLabel for="name" value="Nombre para la ruta:" />
+			<h:inputText id="name" value="#{routeBean.route.name}"
+				label="Nombre para la ruta"  required="true" size="40"/>
+			<h:message for="name" errorClass="MensajeError" />
+			
+			<p:outputLabel for="description" value="Descripción" />
+			<h:inputTextarea id="description" value="#{routeBean.route.description}" cols="38" rows="2"
+				required="true" label="Descripción" />
+			<h:message for="description" errorClass="MensajeError"/>
+
+			<p:outputLabel for="distance" value="Distancia:" />
+			<h:inputText id="distance" value="#{routeBean.route.distance}" 
+				required="true" label="Distancia en metros" /> 
+			<p:message for="distance" errorClass="MensajeError"/>
+			
+			<p:outputLabel for="estimatedTime" value="Tiempo estimado:" />
+			<h:inputText id="estimatedTime" value="#{routeBean.route.estimatedTime}" 
+				required="true" label="Tiempo estimado" /> 
+			<p:message for="estimatedTime" errorClass="MensajeError"/>
+			
+			<p:outputLabel for="dateRealization" value="Fecha de realización:" />
+			<p:calendar id="dateRealization" value="#{routeBean.route.dateRealization}" 
+				required="true" label="Fecha de realización"
+				pattern="dd/MM/yyyy">
+			</p:calendar>
+			<p:message for="dateRealization" errorClass="MensajeError"/>
+			
+			<p:outputLabel for="file" value="Imágen de la ruta:" />
+			<p:fileUpload mode="simple" skinSimple="true" value="#{routeBean.file}" id="file" accept="image/*"></p:fileUpload>
+			<p:message for="file" errorClass="MensajeError"/>
+						
+			<p:outputLabel for="privacyRoute" value="Privacidad:" />
+			<h:selectOneMenu id="privacyRoute"
+				value="#{routeBean.route.privacy}"
+				label="Privacidad" required="true">
+				<f:selectItem itemValue="#{null}" itemLabel = "Seleccione la privacidad" />
+				<f:selectItems value="#{privacyBean.list}" var="privacy"
+					itemValue="#{privacy}" itemLabel="#{privacy.name}" />
+				<f:converter converterId="privacyConverter" />
+			</h:selectOneMenu>
+			<p:message for="privacyRoute" errorClass="MensajeError"/>
+
+			<p:outputLabel for="format" value="Formato:" />
+			<h:selectOneMenu id="format"
+				value="#{routeBean.route.format}"
+				label="Formato" required="true" >
+				<f:selectItem itemValue="#{null}" itemLabel = "Seleccione un formato" />
+				<f:selectItems value="#{formatBean.list}" var="format"
+					itemValue="#{format}" itemLabel="#{format.name}" />
+					<f:converter converterId="formatConverter" />
+			</h:selectOneMenu>
+			<p:message for="format" errorClass="MensajeError" />
+			
+			<p:outputLabel for="difficulty" value="Dificultad:" />
+			<h:selectOneMenu id="difficulty"
+				value="#{routeBean.route.difficulty}"
+				label="dificultad" required="true">
+				<f:selectItem itemValue="#{null}" itemLabel = "Seleccione un tipo de dificultad" />
+				<f:selectItems value="#{difficultyBean.list}" var="dificulty"
+					itemValue="#{dificulty}" itemLabel="#{dificulty.name}" />
+				<f:converter converterId="difficultyConverter" />
+			</h:selectOneMenu>
+			<p:message for="difficulty" errorClass="MensajeError" />
+			
+			<p:outputLabel for="activity" value="Actividad:" />
+			<h:selectOneMenu id="activity" 
+				value="#{routeBean.route.activity}"
+				label="actividad" required="true">
+				<f:selectItem itemValue="#{null}" itemLabel = "Seleccione una actividad" />
+				<f:selectItems value="#{activityBean.list}" var="activity"
+					itemValue="#{activity}" itemLabel="#{activity.name}" />
+				<f:converter converterId="activityConverter" />	
+			</h:selectOneMenu>
+			<p:message for="activity" errorClass="MensajeError"/>
+			
+			<f:facet name="footer">
+				<h:commandButton type="submit" value="Guardar Ruta" action="#{routeBean.saveRoute}"  styleClass="ui-button"/>
+			</f:facet>
+		</p:panelGrid>
+
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>

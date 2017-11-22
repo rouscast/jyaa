@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+	<h3>Lista de Privacidades</h3>
+	<p:link outcome="newprivacy">Nueva Privacidad</p:link>
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<h:dataTable value="#{privacyBean.list}" var="privacy" border="2"
+			cellspacing="1" cellpadding="1" binding="#{privacyBean.privacyTable}">
+			<h:column>
+				<c:facet name="header">Nombre</c:facet>
+                    #{privacy.name}
+                </h:column>
+			<h:column>
+				<c:facet name="header">Editar</c:facet>
+				<h:commandButton value="Editar"
+					action="#{privacyBean.searchPrivacy}">
+					<f:param name="id" value="#{privacy.id}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>
+
+
+
+
+
+

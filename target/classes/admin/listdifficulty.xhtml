@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+		<ui:composition template="/WEB-INF/partials/layout.xhtml">
+
+			<ui:define name="content">
+
+	<h3>Lista de Dificultades</h3>
+	<p:link outcome="newdifficulty">Nueva Dificultad</p:link>
+	<h:form>
+		<h:messages id="mensajeGlobal" showSummary="true" globalOnly="true" errorClass="MensajeError" 
+			infoClass="MensajeInfo" layout="list" styleClass="centrado" />
+		<h:dataTable value="#{difficultyBean.list}" var="difficulty"
+			border="2" cellspacing="1" cellpadding="1" binding="#{difficultyBean.difficultyTable}">
+			<h:column>
+				<c:facet name="header">Nombre</c:facet>
+                    #{difficulty.name}
+                </h:column>
+			<h:column>
+				<c:facet name="header">Editar</c:facet>
+				<h:commandButton value="Editar"
+					action="#{difficultyBean.searchDifficulty}">
+					<f:param name="id" value="#{difficulty.id}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+</h:body>
+
+</html>
+
+
+
+
+
+

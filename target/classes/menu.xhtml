@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<p:panelGrid columns="1">
+		<p:link outcome="/index">Inicio</p:link>
+		<p:link outcome="/regist">Registro</p:link>
+		<p:link outcome="/login">Login</p:link>
+		<p:link outcome="/admin/listdifficulty">Listar Dificultad</p:link>
+		<p:link outcome="/user/editmyprofile">Editar Perfil</p:link>
+	</p:panelGrid>
+	<h:form>
+		<p:commandButton value="Cerrar Seccion" action="#{loginBean.logout}"
+			ajax="no-ajax" />
+	</h:form>
+</h:body>
+
+</html>

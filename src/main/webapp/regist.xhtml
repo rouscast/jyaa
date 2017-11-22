@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="WEB-INF/partials/layout.xhtml">
+   		<ui:define name="content">
+	<h:form>
+		<p:panelGrid columns="3"  styleClass="ui-panelgrid-blank">
+
+			<p:outputLabel for="userName" value="Nombre de usuario:" />
+			<p:inputText id="userName" value="#{registBean.userName}"
+				validator="#{userBean.validateUserName}" required="true"
+				label="Nombre de usuario" />
+			<p:message for="userName" />
+
+			<p:outputLabel for="password" value="Contraseña:" />
+			<p:password id="password" value="#{registBean.password}"
+				match="repassword"
+				validatorMessage="Las contraseñas deben ser iguales" required="true"
+				label="Contraseña" />
+			<p:message for="password" />
+
+			<p:outputLabel for="repassword" value="Repita Contraseña:" />
+			<p:password id="repassword" value="#{registBean.repassword}"
+				required="true" label="Repita Contraseña" />
+			<p:message for="repassword" />
+
+			<p:outputLabel for="names" value="Nombres:" />
+			<p:inputText id="names" value="#{registBean.names}" required="true"
+				label="Nombres" />
+			<p:message for="names" />
+
+			<p:outputLabel for="lastName" value="Apellidos:" />
+			<p:inputText id="lastName" value="#{registBean.lastName}"
+				required="true" label="Apellidos" />
+			<p:message for="lastName" />
+
+			<p:outputLabel for="birthdate" value="Fecha de nacimiento:" />
+			<p:calendar id="birthdate" value="#{registBean.birthdate}" 
+			label="Fecha de nacimiento">
+				<f:convertDateTime pattern="MM/dd/yyyy" />
+				<f:validator validatorId="birthdateValidator" />
+			</p:calendar>			
+			<p:message for="birthdate" />
+
+			<p:outputLabel for="mail" value="Email:" />
+			<p:inputText id="mail" value="#{registBean.mail}" required="true"
+				label="Email" validator="#{userBean.validateMail}" />
+			<p:message for="mail" />
+
+			<p:outputLabel for="sex" value="Sexo:" />
+			<p:selectOneRadio id="sex" value="#{registBean.sex}" required="true"
+				label="Sexo">
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+				<f:selectItem itemValue="FEMENINO" itemLabel="Femenino" />
+			</p:selectOneRadio>
+			<p:message for="sex" />
+
+			<p:outputLabel for="dom" value="Domicilio:" />
+			<p:inputText id="dom" value="#{registBean.domicile}" required="true"
+				label="Domicilio" />
+			<p:message for="dom" />
+
+			<p:outputLabel for="doc" value="Documento:" />
+			<p:selectOneListbox id="doc" value="#{registBean.documentType}"
+				label="Documento" required="true">
+				<f:selectItems value="#{documentTypeBean.list}" var="documentType"
+					itemValue="#{documentType.id}" itemLabel="#{documentType.name}" />
+			</p:selectOneListbox>
+			<p:message for="doc" />
+
+			<p:outputLabel for="numberDoc" value="Nro:" />
+			<p:inputText id="numberDoc" value="#{registBean.nroDocument}"
+				required="true" label="Nro"
+				validatorMessage="Ingrese un documento real">
+				<f:validateLongRange for="numberDoc" minimum="100000"
+					maximum="1000000000" />
+			</p:inputText>
+			<p:message for="numberDoc" />
+
+
+			<f:facet name="footer" >
+				<p:commandButton type="submit" value="Registrar"
+					action="#{registBean.register}" ajax="false" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>	
+	</ui:define>
+	</ui:composition>
+	
+	
+</h:body>
+</html>	
